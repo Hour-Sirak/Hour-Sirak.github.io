@@ -1,89 +1,52 @@
 const randColor = () =>{
 	return "#"+Math.random().toString(16).slice(2, 8)
 }
-let words = ["Google", "Astronomy", "Naruto", "Psychology", "Bek Sloy", "Uwu"]//, "a", "b", "c", "d"]//['안녕하세요!', '소년', '어머니', '바보']
-const canvas = document.getElementById('wheel');
-const ctx = canvas.getContext('2d');
-const w = canvas.width = 400;
-const h = canvas.height = 400;
 
-const renderWheel = ()=>{
-	ctx.clearRect(0, 0, w, h)
-	let cx = w/2
-	let cy = h/2
-	let radius = 195
-	let anglePerSlice = Math.PI*2 / words.length
-	let startAngle = Math.PI*3 / 2 + anglePerSlice / 2//Math.PI*2 - anglePerSlice
-	let rev = words.slice().reverse()
-		{// {ctx.restore()
-		// ctx.save()
-		// let endAngle = startAngle + anglePerSlice
-		
-		// ctx.fillStyle = randColor()
-		// ctx.lineWidth = 10
-		// ctx.beginPath()
-		// ctx.lineTo(cx, cy )
-		// ctx.arc(cx, cy, radius, startAngle, endAngle, false)
-		// ctx.stroke()
-		// ctx.fill()
-		// ctx.closePath()
-		
-		// ctx.beginPath()
-		// ctx.font = '18px Helvetica'
-		// ctx.textAlign = 'center'
-		// ctx.fillStyle = "white"
-		// let theta = (startAngle + endAngle) / 2
-		// let tx = cx + Math.cos(theta)*radius/1.9
-		// let ty = cy + Math.sin(theta)*radius/1.9
-		// ctx.translate(tx, ty)
-		// ctx.rotate(theta)
-		// ctx.fillText(word, 0, 5) // 5 for teh text to center
-		// ctx.closePath()
-
-		// console.log(word)
-		// startAngle = endAngle}\
-	// ctx.moveTo(100, 0)
-	// ctx.lineStyle = 'white'
-	// ctx.lineWidth = 10
-	// ctx.lineTo(cx, cy)
-	// ctx.stroke()
+class Wheel{
+	constructor(){
+		this.wheel = document.querySelector('.wheel')
+		this.secs = document.querySelectorAll('.sec')
+		this.words = []//document.querySelectorAll('.sec p')
+		for(let i = 0; i < this.secs.length; i++){
+			this.words.push(this.secs[i].firstElementChild.innerText)
 		}
-	rev.forEach(word =>{
-		ctx.restore()
-		ctx.save()
-		let endAngle = startAngle + anglePerSlice
-		
-		ctx.beginPath()
-		ctx.fillStyle = randColor()
-		ctx.lineWidth = 5
-		ctx.strokeStyle = 'white'
-		// let pos = ctx.getBoundingClientRect
+		console.log(this.secs, this.words)
+		this.anglePerSlice = this.diameter / this.words.length
+	}
 
-		ctx.lineTo(cx, cy)
-		ctx.arc(cx, cy, radius, startAngle, endAngle, false)
-		ctx.lineTo(cx, cy)
-		ctx.stroke()
-		ctx.fill()
-		ctx.closePath()
-		
-		ctx.beginPath()
-		ctx.font = '18px Helvetica'
-		ctx.textAlign = 'center'
-		ctx.fillStyle = "white"
-		let theta = (startAngle + endAngle) / 2
-		let tx = cx + Math.cos(theta)*radius/1.9
-		let ty = cy + Math.sin(theta)*radius/1.9
-		ctx.translate(tx, ty)
-		ctx.rotate(theta)
-		ctx.fillText(word, 0, 5) // 5 for teh text to center
-		ctx.closePath()
+	get diameter(){
+		return parseFloat(window.getComputedStyle(this.wheel).width)
+	}
 
-		console.log(word)
-		startAngle = endAngle
-	})
+	render(){
+		// let cx = w/2
+		// let cy = h/2
+		let startAngle = Math.PI*3 / 2 + anglePerSlice / 2
+		// let rev = words.slice().reverse()
+		rev.forEach(word =>{
+	
+			let endAngle = startAngle + anglePerSlice
+			ctx.arc(cx, cy, radius, startAngle, endAngle, false)
+			
+			// ctx.beginPath()
+			// ctx.font = '18px Helvetica'
+			// ctx.textAlign = 'center'
+			// ctx.fillStyle = "white"
+			// let theta = (startAngle + endAngle) / 2
+			// let tx = cx + Math.cos(theta)*radius/1.9
+			// let ty = cy + Math.sin(theta)*radius/1.9
+			// ctx.translate(tx, ty)
+			// ctx.rotate(theta)
+			// ctx.fillText(word, 0, 5) // 5 for teh text to center
+			// ctx.closePath()
+			startAngle = endAngle
+		})
+	}
 }
+// let words = ["Google", "Astronomy", "Naruto", "Psychology", "Bek Sloy", "Uwu"]//, "a", "b", "c", "d"]//['안녕하세요!', '소년', '어머니', '바보']
+
 window.onload = () =>{
-	renderWheel()
+	const wheel = new Wheel()
 	let spin = document.getElementById('spin')
 	let degree = 1500
 	let id;
