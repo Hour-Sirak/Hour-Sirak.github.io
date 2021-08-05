@@ -20,30 +20,97 @@ main{
 	position: relative;
 	width: calc(100vh / 2);
 	height: calc(100vh / 2);
-	border-radius: 50%;
+	/* border-radius: 50%; */
 	background-color: rgb(224, 222, 215);
 	display: flex;
-	align-items: center;
-
+	flex-direction: column;
+	justify-content: center;
 	overflow: hidden;
 }
 
 .wheel .sec{
 	position: absolute;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 53%;
-	height: 30%;
+	/* justify-content: center; */
+	/* align-items: center; */
+	width: 0;
+	height: 0;
+	border-style: solid;
+	/* border-width: 25vh 100px 0px; */
+	/* border-color:brown transparent; */
+	align-self: center;
+	top: 0;
+	transform-origin: 50% bottom;
+	/* transform: rotate(45deg); */
+	/* width: 50%;
+	height: 100%;
 	background-color: rgb(248, 48, 215);
 	clip-path: polygon(100% 50%, 0% 100%, 0% 0%);
-	transform: translate(-3%);
 	border-width: 0px;
 	border-style: solid;
-	border-color: chocolate;
-	transform-origin: 100% 50%;
+	border-color: chocolate; 
+	transform-origin: 100% 50%;*/
 }
 
-.wheel div:nth-child(1){
-	transform: translate(-3%) rotate(90deg);
+.sec p{
+	/* margin: 30px; */
 }
+.wheel div:nth-child(1){
+	/* transform: rotate(90deg); */
+}
+
+.wheel{
+	transition: transform cubic-bezier(0, 0.99, 0.44, 0.99);
+	transition-duration: 1s;
+}
+
+#spin{
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	background-color: #fff;
+	border-radius: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 0px;
+	cursor: pointer;
+	user-select: none;
+	align-self: center;
+	
+}
+#spin::before{
+	content: '';
+	width: 0;
+	height: 0;
+	position: absolute;
+	border-style: solid;
+	border-width: 0 8px 15px 8px;
+	border-color: transparent transparent #fff transparent;
+	top: -0.6rem;
+}
+#spin::after{
+	position: absolute;
+	content: 'SPIN';
+	color: #ccc;
+	z-index: 1000;
+	font: 10px 'Exo 2', sans-serif;
+	text-shadow: 0 1px 0 #fff, 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+#spin .inner{
+	width: 82%;
+	height: 82%;
+	position: absolute;
+	border-radius: 50%;
+	/* margin-left: 5%;
+	margin-top: 1%; */
+	box-shadow: rgba(255, 255, 255, 1) 0px -2px 0px inset,
+				rgba(255, 255, 255, 1) 0px 2px 0px inset,
+				rgba(0, 0, 0, 0.4) 0 0 5px;
+	background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, 
+				rgba(234, 234, 234, 0.8) 100%);
+
+}
+

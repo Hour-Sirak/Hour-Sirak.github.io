@@ -1,0 +1,40 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	width: 100vw;
+	height: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.container{
+	width: 40%;
+	height: 40%;
+	background-color: black;
+	display: flex;
+	border-radius: 50%;
+	/* align-items: center; */
+	justify-content: center;
+	overflow: hidden;
+}
+
+.polygon{
+	width: 0;
+	height: 0;
+	border-width: 20vw 50px 0;
+	border-color: coral transparent;
+	border-style: solid;
+	transform-origin: 50% bottom;
+	transform: rotate(45deg);
+	/* background-color: aqua;
+	clip-path: polygon(100% 50%, 50% 100%, 0% 50%, 0% 0%, 100% 0%); */
+}
+
+.polygon:hover{
+	background-color: cornflowerblue;
+}

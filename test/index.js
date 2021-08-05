@@ -10,7 +10,6 @@ class Wheel{
 		for(let i = 0; i < this.secs.length; i++){
 			this.words.push(this.secs[i].firstElementChild.innerText)
 		}
-		this.p = document.querySelectorAll('.sec p')
 		console.log(this.secs, this.words)
 		this.anglePerSlice = 360 / this.words.length
 	}
@@ -22,26 +21,21 @@ class Wheel{
 	render(){
 		// let cx = w/2
 		// let cy = h/2
-		let startAngle = 0
+		let startAngle = 90
 		let theta = Math.PI*2 / this.words.length
 		let height = Math.pow(2*this.radius*Math.sin(theta/2), 1.123)
 		let h = height + (height * 3)
 		let s = 100
 		let e = 100 - s
-		let tangent = this.radius*Math.tan(theta/2)
+		let tangent = this.radius*Math.tan(theta/2) * 2
 		let end = (this.radius * 2) - tangent 
 		console.log(this.radius, tangent, end)
-		console.log((tangent/ 2) /this.radius, Math.tan(theta/2))
-		let i = 0
 		this.secs.forEach(sec=>{
-			sec.style.borderWidth = `25vh ${tangent}px 0px`;
-			sec.style.borderColor = randColor() + ' transparent'
-			// console.log(s, this.radius, height, h)
-			// // sec.style.height = `${height}px`
-			// sec.style.backgroundColor = randColor()
-			// sec.style.clipPath = `polygon(100% 50%, 0% ${tangent}px, 0% ${end}px)`
+			console.log(s, this.radius, height, h)
+			// sec.style.height = `${height}px`
+			sec.style.backgroundColor = randColor()
+			sec.style.clipPath = `polygon(100% 50%, 0% ${tangent}px, 0% ${end}px)`
 			sec.style.transform = `rotate(${startAngle}deg)`
-			// p[i].style.transform = `rotate(${startAngle}deg)`
 			startAngle = startAngle - this.anglePerSlice
 		})
 		// let startAngle = Math.PI*3 / 2 + this.anglePerSlice / 2
