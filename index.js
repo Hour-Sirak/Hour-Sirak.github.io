@@ -4,7 +4,7 @@ const randColor = () =>{
 
 class Wheel{
 	constructor(){
-		this.wheel = document.querySelector('.wheel')
+		this.wheel = document.querySelector('#wheel')
 		this.secs = document.querySelectorAll('.sec')
 		this.words = []//document.querySelectorAll('.sec p')
 		for(let i = 0; i < this.secs.length; i++){
@@ -24,46 +24,19 @@ class Wheel{
 		// let cy = h/2
 		let startAngle = 0
 		let theta = Math.PI*2 / this.words.length
-		let height = Math.pow(2*this.radius*Math.sin(theta/2), 1.123)
-		let h = height + (height * 3)
-		let s = 100
-		let e = 100 - s
 		let tangent = this.radius*Math.tan(theta/2)
-		let end = (this.radius * 2) - tangent 
-		console.log(this.radius, tangent, end)
-		console.log((tangent/ 2) /this.radius, Math.tan(theta/2))
 		let i = 0
 		this.secs.forEach(sec=>{
-			sec.style.borderWidth = `25vh ${tangent}px 0px`;
+			sec.style.borderWidth = `calc(25vh + 1.9px) ${tangent}px 0px`;
 			sec.style.borderColor = randColor() + ' transparent'
-			// console.log(s, this.radius, height, h)
-			// // sec.style.height = `${height}px`
-			// sec.style.backgroundColor = randColor()
-			// sec.style.clipPath = `polygon(100% 50%, 0% ${tangent}px, 0% ${end}px)`
+		
 			sec.style.transform = `rotate(${startAngle}deg)`
-			// p[i].style.transform = `rotate(${startAngle}deg)`
+			this.p[i].style.transform = `translateY(-16vh) rotate(${-90}deg)`
 			startAngle = startAngle - this.anglePerSlice
+			i++
 		})
 		// let startAngle = Math.PI*3 / 2 + this.anglePerSlice / 2
 		// let rev = this.words.slice().reverse()
-		words.forEach(word =>{
-	
-			let endAngle = startAngle + anglePerSlice
-			
-			
-			// ctx.beginPath()
-			// ctx.font = '18px Helvetica'
-			// ctx.textAlign = 'center'
-			// ctx.fillStyle = "white"
-			// let theta = (startAngle + endAngle) / 2
-			// let tx = cx + Math.cos(theta)*radius/1.9
-			// let ty = cy + Math.sin(theta)*radius/1.9
-			// ctx.translate(tx, ty)
-			// ctx.rotate(theta)
-			// ctx.fillText(word, 0, 5) // 5 for teh text to center
-			// ctx.closePath()
-			startAngle = endAngle
-		})
 	}
 }
 // let words = ["Google", "Astronomy", "Naruto", "Psychology", "Bek Sloy", "Uwu"]//, "a", "b", "c", "d"]//['안녕하세요!', '소년', '어머니', '바보']
@@ -75,16 +48,14 @@ window.onload = () =>{
 	let degree = 1500
 	let id;
 	spin.onclick = () => {
-		let delay = parseInt(window.getComputedStyle(canvas).transitionDuration.replace('s', ''))*1000
-		console.log(delay*1000)
+		let delay = parseInt(window.getComputedStyle(wheel.wheel).transitionDuration.replace('s', ''))*1000
 		clearTimeout(id)
 		degree += Math.floor((Math.random() + 1) * 1500)
 
-		canvas.style.transform = `rotate(${degree}deg)`
-		let anglePerSliceDeg = 360 / words.length
-		let offset = anglePerSliceDeg / 2
-		let index = Math.floor( Math.ceil((degree + offset) % 360) / anglePerSliceDeg )
-		console.log(degree, anglePerSliceDeg, index, words[index])
+		wheel.wheel.style.transform = `rotate(${degree}deg)`
+
+		let offset = wheel.anglePerSlice / 2
+		let index = Math.floor( Math.ceil((degree + offset) % 360) / wheel.anglePerSlice )
 		id = setTimeout(()=>{
 			let synth = window.speechSynthesis
 			let voices = synth.getVoices()
@@ -92,8 +63,8 @@ window.onload = () =>{
 				var option = voices[i].name + ' (' + voices[i].lang + ')';
 				console.log(option)
 			}
-			let msg = new SpeechSynthesisUtterance(words[index])
-			msg.lang = 'ko-KR'
+			let msg = new SpeechSynthesisUtterance(wheel.words[index])
+			msg.lang = 'en'
 			speechSynthesis.speak(msg)
 			// msg.voice = voices[]
 		}, delay)

@@ -16,11 +16,19 @@ main{
 	background-color: rgb(26, 224, 191);
 }
 
-.wheel{
+.container{
+	width: 60%;
+	height: 60%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#wheel{
 	position: relative;
-	width: calc(100vh / 2);
-	height: calc(100vh / 2);
-	/* border-radius: 50%; */
+	width: 50vh ;
+	height: 50vh;
+	border-radius: 50%;
 	background-color: rgb(224, 222, 215);
 	display: flex;
 	flex-direction: column;
@@ -28,40 +36,32 @@ main{
 	overflow: hidden;
 }
 
-.wheel .sec{
+#wheel .sec{
 	position: absolute;
 	display: flex;
-	/* justify-content: center; */
-	/* align-items: center; */
+	justify-content: center;
 	width: 0;
 	height: 0;
 	border-style: solid;
-	/* border-width: 25vh 100px 0px; */
-	/* border-color:brown transparent; */
 	align-self: center;
 	top: 0;
 	transform-origin: 50% bottom;
-	/* transform: rotate(45deg); */
-	/* width: 50%;
-	height: 100%;
-	background-color: rgb(248, 48, 215);
-	clip-path: polygon(100% 50%, 0% 100%, 0% 0%);
-	border-width: 0px;
-	border-style: solid;
-	border-color: chocolate; 
-	transform-origin: 100% 50%;*/
 }
 
 .sec p{
-	/* margin: 30px; */
-}
-.wheel div:nth-child(1){
-	/* transform: rotate(90deg); */
+	position: absolute;
+	color: white;
+	/* transform-origin: center; */
+	/* transform: translateY(-16vh); */
 }
 
-.wheel{
+.sec:hover{
+	background-color: blue;
+}
+
+#wheel{
 	transition: transform cubic-bezier(0, 0.99, 0.44, 0.99);
-	transition-duration: 1s;
+	transition-duration: 6s;
 }
 
 #spin{
