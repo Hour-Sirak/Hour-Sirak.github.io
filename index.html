@@ -7,14 +7,17 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-	<main>
 	
+	<main>
 		<div class="container">
+			<div id="option">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
 			<div id="wheel">
 				<div class="sec">
 					<p>Python</p>
-					<a href="">test</a>
 				</div>
 				<div class="sec">
 					<p>Javascript</p>
@@ -32,20 +35,54 @@
 			
 			<div id=spin>
 				<div class="inner">
-	
+					
 				</div>
 			</div>
 			
 		</div>
 		
-		
-		<div id="addTextContainer">
+		<div id="toolWindow">
+			<form action="">
+				<div id="delayWrapper">
+					<label for="delay">Delay:</label>
+					
+					<div id="sliderWrapper">
+						<input type="range" min=3 max=30 name="delay" id="slider">
+						<div id="delayValue">
+							<p>3s</p>
+						</div>
+					</div>
+				</div>
+				
+				<div id="wordContainer">
+					<!-- <div class="wordWrapper">
+						<input type="text" name="word" id="word0">
+						<span class="delete button">Delete</span>
+					</div> -->
+
+				</div>
+
+				<div id="addButton" class="button">
+					Add
+				</div>
+			</form>
+
+			<div id="definition">
+				definition
+			</div>
+
+			<div id="confirmCancel">
+				<div class="button" id="confirm">Confirm</div>
+				<div class="button" id="cancel">Cancel</div>
+			</div>
+		</div>
+		<!-- <div id="addTextContainer">
 			<label for="addText">Add Text:</label>
 			<input type="text" name="addText" id="addText">
-		</div>
+		</div> -->
 		
 	</main>
-
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="index.js"></script>
 </body>
 </html>

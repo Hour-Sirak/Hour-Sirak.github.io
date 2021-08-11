@@ -18,52 +18,40 @@ body{
 	height: 40%;
 	background-color: black;
 	display: flex;
-	/* border-radius: 50%; */
+	border-radius: 50%;
 	justify-content: center;
 	overflow: hidden;
 	/* z-index: 10; */
-
-}
-
-.polygon{
-	position: absolute;
-	width: 50%;
-	height: 20vh;
-	/* background-color: rgba(76, 172, 172, 1); */
-	/* background-color: brown; */
-	transform: rotate(45deg);
-	transform-origin: 50% bottom;
-}
-
-.container .polygon:nth-child(2){
 	
-	transform: rotate(100deg);
 }
 
 .button{
 	position: absolute;
 	width: 100%;
-	height: 100%;
-	background-color: rgba(37, 60, 122, 0.4);
+	height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(37, 60, 122, 1);
+	clip-path: polygon(0 0, 100% 0, 50% 100%);
+	transition: all 2s;
+	transform-origin: 50% bottom;
+	/* transform: rotate(90deg); */
 }
 
-.shape{
+/* .shape{
 	position: absolute;
-	/* box-sizing: border-box; */
 	width: 0px;
 	height: 0px;
-	/* background-color: cadetblue; */
 	border-width: 20vh 10vh 0;
 	border-color: coral transparent;
 	border-style: solid;
-	/* top: 0; */
 	z-index: -999;
-	
-}
+} */
 
-.button:hover ~.shape{
-	border-color: rgb(21, 199, 169) transparent;
-	
+.button:hover{
+	background-color: khaki !important;
+	/* transform: translateY(100px) !important; */
 }
 
 
