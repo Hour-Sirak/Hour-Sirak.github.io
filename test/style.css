@@ -34,7 +34,7 @@ body{
 	justify-content: center;
 	background-color: rgba(37, 60, 122, 1);
 	clip-path: polygon(0 0, 100% 0, 50% 100%);
-	transition: all 2s;
+	/* transition: all 2s; */
 	transform-origin: 50% bottom;
 	/* transform: rotate(90deg); */
 }
@@ -54,4 +54,26 @@ body{
 	/* transform: translateY(100px) !important; */
 }
 
+
+.pallete{
+	background-color: black;
+	width: 100px;
+	height: 100px;
+	margin: 20px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 100px;
+	color: white;
+}
+
+.btn{
+	color: white;
+	/* width: 80px; */
+	height: 2rem;
+	background-color: black;
+	border-radius: 10px;
+	cursor: pointer;
+	text-align: center;
+	padding: 1rem;
+}
 

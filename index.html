@@ -1,88 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Wheel Of Words</title>
-	<link rel="stylesheet" href="style.css">
-</head>
-<body>
-	
-	<main>
-		<div class="container">
-			<div id="option">
-				<div></div>
-				<div></div>
-				<div></div>
-			</div>
-			<div id="wheel">
-				<div class="sec">
-					<p>Python</p>
-				</div>
-				<div class="sec">
-					<p>Javascript</p>
-				</div>
-				<div class="sec">
-					<p>Ruby</p>
-				</div>
-				<div class="sec">
-					<p>Golang</p>
-				</div>
-				<div class="sec">
-					<p>Haskel</p>
-				</div>
-			</div>
-			
-			<div id=spin>
-				<div class="inner">
-					
-				</div>
-			</div>
-			
-		</div>
-		
-		<div id="toolWindow">
-			<form action="">
-				<div id="delayWrapper">
-					<label for="delay">Delay:</label>
-					
-					<div id="sliderWrapper">
-						<input type="range" min=3 max=30 name="delay" id="slider">
-						<div id="delayValue">
-							<p>3s</p>
-						</div>
-					</div>
-				</div>
-				
-				<div id="wordContainer">
-					<!-- <div class="wordWrapper">
-						<input type="text" name="word" id="word0">
-						<span class="delete button">Delete</span>
-					</div> -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Wheel Of Words</title>
+        <script
+            src="https://kit.fontawesome.com/447db5c681.js"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <main>
+            <div class="container">
+                <div id="option">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div id="wheel">
+                    <!-- <div class="sec">
+                        <p>Python</p>
+                    </div>
+                    <div class="sec">
+                        <p>Javascript</p>
+                    </div>
+                    <div class="sec">
+                        <p>Ruby</p>
+                    </div>
+                    <div class="sec">
+                        <p>Golang</p>
+                    </div>
+                    <div class="sec">
+                        <p>Haskel</p>
+                    </div> -->
+                </div>
 
-				</div>
+                <div id="spin">
+                    <div class="inner"></div>
+                </div>
+            </div>
 
-				<div id="addButton" class="button">
-					Add
-				</div>
-			</form>
+            <div id="toolWindow" class="hide">
+                <form action="" autocomplete="off" class="sunken scroll">
+                    <div id="delayWrapper">
+                        <label for="delay">Delay:</label>
 
-			<div id="definition">
-				definition
-			</div>
+                        <div id="sliderWrapper">
+                            <input
+                                type="range"
+                                min="3"
+                                max="30"
+                                name="delay"
+                                id="slider"
+                            />
+                            <div id="delayValue">
+                                <p>3s</p>
+                            </div>
+                        </div>
+                    </div>
 
-			<div id="confirmCancel">
-				<div class="button" id="confirm">Confirm</div>
-				<div class="button" id="cancel">Cancel</div>
-			</div>
-		</div>
-		<!-- <div id="addTextContainer">
+                    <div id="wordInputContainer">
+                        <!-- <div class="wordWrapper">
+                            <input type="text" name="word" id="word0">
+                            <span class="delete button">Delete</span>
+                        </div> -->
+                    </div>
+                </form>
+
+                <div id="dictContainer">
+                    <div id="dictionary1" class="sunken scroll">
+                        <h2><i class="fas fa-caret-down"></i>English</h2>
+                        <div class="hide"></div>
+                    </div>
+                    <!-- <br>
+                        <ul class="wordWrapper">
+                            <li class="word">word</li>
+                            <li class="phonetic">phonetic</li>
+                            <li>meaning:</li>
+                            <ul class="meanings">
+                                <li class="partOfSpeech">part of speach</li>
+                                <li>
+                                    <ol>
+                                        <li class="definition">
+                                            <p>definition</p>
+                                        </li>
+                                </ol>
+                            </li>
+                        </ul>
+                        <li class="origin"></li>
+                    </ul> -->
+                    <div id="dictionary2" class="sunken scroll">
+                        <h2><i class="fas fa-caret-down"></i>Korean</h2>
+                        <div class="hide"></div>
+                    </div>
+                </div>
+
+                <div id="fourth">
+                    <span id="addButton" class="button">
+                        <i class="fas fa-plus"></i>
+                        <!-- <i class="fas fa-plus-circle"></i> -->
+                    </span>
+                    <div id="wordNum">0</div>
+                </div>
+                <div id="confirmCancel">
+                    <div class="button" id="done"><span> Done </span></div>
+                    <div class="button" id="cancel"><span>Cancel</span></div>
+                </div>
+            </div>
+            <!-- <div id="addTextContainer">
 			<label for="addText">Add Text:</label>
 			<input type="text" name="addText" id="addText">
 		</div> -->
-		
-	</main>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script src="index.js"></script>
-</body>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/idb-keyval@5/dist/iife/index-min.js"></script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script type="module" src="index.js"></script>
+    </body>
 </html>
