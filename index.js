@@ -10,6 +10,9 @@ const dictionary2 = document.getElementById("dictionary2");
 const koreanDict = dictionary2.querySelector("div");
 const koreanMore = dictionary2.querySelector("h2 i");
 
+const englishLds = document.getElementById("englishLds");
+const koreanLds = document.getElementById("koreanLds");
+
 let globalWord;
 let source;
 
@@ -53,23 +56,23 @@ const languageObj = (value) => {
 };
 const apiKey = "d2153a53eamsha9fb0ca6180437cp179df3jsn7fb23728306a";
 
-import {
-    get,
-    set,
-    getMany,
-    setMany,
-    update,
-    del,
-    clear,
-    keys,
-    values,
-    entries,
-    createStore,
-} from "https://cdn.jsdelivr.net/npm/idb-keyval@5/+esm";
+// import {
+//     get,
+//     set,
+//     getMany,
+//     setMany,
+//     update,
+//     del,
+//     clear,
+//     keys,
+//     values,
+//     entries,
+//     createStore,
+// } from "https://cdn.jsdelivr.net/npm/idb-keyval@5/+esm";
 
-const qs = (obj) => {
-    return new URLSearchParams(obj).toString();
-};
+// const qs = (obj) => {
+//     return new URLSearchParams(obj).toString();
+// };
 
 const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
 
@@ -80,6 +83,17 @@ const randColor = () => {
         color += Math.floor(Math.random() * 10);
     }
     return color;
+};
+
+const showLoading = () => {
+    hide(englishDict);
+    hide(koreanDict);
+    show(englishLds);
+    show(koreanLds);
+};
+const hideLoading = () => {
+    hide(englishLds);
+    hide(koreanLds);
 };
 
 const toggle = (elem, cssClass = "hide", callback = () => {}) => {
@@ -103,6 +117,10 @@ const show = (elem, callback = () => {}) => {
 
 const removeClass = (elem, class_) => {
     elem.classList.contains(class_) && elem.classList.remove(class_);
+};
+
+const addClass = (elem, class_) => {
+    !elem.classList.contains(class_) && elem.classList.add(class_);
 };
 
 const expand = (elem) => {};
@@ -200,6 +218,7 @@ const structured = (word, lang = language.english) => {
     if (item !== null && item.html) {
         console.log("structured");
         language.getHtmlDiv(lang).innerHTML = item.html;
+        hideLoading();
         return;
     }
     const formatPhon = (phon) => (phon && `/${phon}/`) || "";
@@ -243,11 +262,13 @@ const structured = (word, lang = language.english) => {
 			</ul>`;
             language.getHtmlDiv(lang).innerHTML = html;
             localSet(key, localObj(html, lang));
+            hideLoading();
         })
         .catch((error) => {
             language.getHtmlDiv(
                 lang
             ).innerHTML = `<h4>Sorry could not find the word: ${word}</h4>`;
+            hideLoading();
         });
 };
 
@@ -256,9 +277,10 @@ const renderDict = (lang = null) => {
     if (source) {
         console.log(source);
         source.cancel();
-        console.log(source);
     }
     if (globalWord) {
+        const englishLds = document.getElementById("englishLds");
+        const koreanLds = document.getElementById("koreanLds");
         const tran = (htmlDiv) => {
             detect(globalWord, (source) => {
                 if (source === lang) {
@@ -275,42 +297,50 @@ const renderDict = (lang = null) => {
             });
         };
         if (lang === null) {
+            showLoading();
             detect(globalWord, (source) => {
-                console.log(language.getHtmlDiv(language.getTarget(source)));
-                hide(
-                    language.getHtmlDiv(language.getTarget(source)),
-                    toggleDictWidth
-                );
+                const target = language.getTarget(source);
+
+                hide(language.getHtmlDiv(target), toggleDictWidth);
                 show(language.getHtmlDiv(source), toggleDictWidth);
                 structured(globalWord, source);
             });
         } else if (lang === language.korean) {
+            koreanDict.innerHTML = "";
+            show(koreanLds);
             tran(koreanDict);
         } else {
+            englishDict.innerHTML = "";
+            show(englishLds);
             console.log("en more click", globalWord);
             tran(englishDict);
         }
     }
 };
 
-const suggest = (word) => {
+const suggest = (word, success, fail = console.log) => {
     if (word) {
         const url = `https://api.datamuse.com/words?sp=${word}*&max=5`;
-        return axios
+        axios
             .get(url)
-            .then((res) => res.data)
-            .catch((error) => error);
+            .then((res) => success(res.data))
+            .catch((error) => fail(error));
     }
 };
 
 class Wheel {
     constructor(form) {
         this.wheel = document.querySelector("#wheel");
-        this.secs = [];
         //document.querySelectorAll('.sec p')
         // for (let i = 0; i < this.secs.length; i++) {
         //     this.words.push(this.secs[i].firstElementChild.innerText);
         // }
+        this.delay =
+            parseInt(
+                window
+                    .getComputedStyle(this.wheel)
+                    .transitionDuration.replace("s", "")
+            ) * 1000;
         this.form = form;
         this.p = document.querySelectorAll(".sec p");
     }
@@ -323,6 +353,8 @@ class Wheel {
         return 360 / this.form.words.length;
     }
 
+    init() {}
+
     createSec() {
         const sec = document.createElement("div");
         sec.classList.add("sec");
@@ -334,10 +366,12 @@ class Wheel {
     render(option) {
         // let cx = w/2
         // let cy = h/2
+        this.degree = 1500;
+        this.seen = new Set();
         const words = this.form.words;
+        this.wheel.style.transform = "rotate(0deg)";
+        this.wheel.innerHTML = "";
         if (words.length != 0) {
-            console.log([] == words)
-            this.wheel.innerHTML = "";
             this.secs = [];
             for (let i = 0; i < words.length; i++) {
                 const word = words[i];
@@ -364,12 +398,32 @@ class Wheel {
             });
         } else {
             const dots = option.querySelectorAll("div");
-            toggle(option, "blink");
+            addClass(option, "blink");
             dots.forEach((dot) => {
-                toggle(dot, "blinkDot");
+                addClass(dot, "blinkDot");
             });
         }
         // let startAngle = Math.PI*3 / 2 + this.anglePerSlice / 2
+    }
+
+    spin() {
+        let extraTime = 0;
+        this.degree += Math.floor((Math.random() + 1) * 1500);
+
+        let offset = this.anglePerSlice / 2;
+        const getIndex = () =>
+            Math.floor(
+                Math.ceil((this.degree + offset) % 360) / this.anglePerSlice
+            );
+        let index = getIndex();
+        while (this.seen.has(index)) {
+            this.degree += this.anglePerSlice / 2;
+            index = getIndex();
+            extraTime += 20;
+        }
+        this.wheel.style.transform = `rotate(${this.degree}deg)`;
+        this.seen.add(index);
+        return [this.form.words[index], extraTime, index];
     }
 }
 
@@ -407,6 +461,13 @@ class WordInputWrappers {
         this.container = [];
         this.id = 0;
         this.wordInputContainer = document.getElementById("wordInputContainer");
+        this.wordNum = document.getElementById("wordNum");
+    }
+
+    get length() {
+        return this.container.filter(
+            (wordInputWrapper) => wordInputWrapper.querySelector("input").value
+        ).length;
     }
 
     create(word = "") {
@@ -415,7 +476,7 @@ class WordInputWrappers {
         border.classList.add("border");
         const wordInputWrapper = document.createElement("div");
         wordInputWrapper.classList.add("wordInputWrapper");
-        wordInputWrapper.innerHTML = `<input type='text' name='word' id='word${this.id}' value='${word}'><span class='delete button'><i class="fas fa-times"></i></span>`;
+        wordInputWrapper.innerHTML = `<input type='text' name='word' id='word${this.id}' value='${word}'> <button type='button' class='delete button'><i class="fas fa-times"></i></button>`;
         wordInputWrapper.lastElementChild.onclick = () =>
             this.delete(div, wordInputWrapper);
         const input = wordInputWrapper.firstElementChild;
@@ -456,6 +517,7 @@ class WordInputWrappers {
         input.addEventListener("keypress", (e) => {
             if (e.key === "Enter") {
                 input.blur();
+                this.wordNum.innerText = `${this.length}/${this.container.length}`;
             }
         });
 
@@ -465,8 +527,9 @@ class WordInputWrappers {
 
         this.container.push(wordInputWrapper);
         this.id++;
-        const wordNum = document.getElementById("wordNum");
-        wordNum.innerText = parseInt(wordNum.innerText) + 1;
+        // update the number of words
+        this.wordNum.innerText = `${this.length}/${this.container.length}`;
+
         return wordInputWrapper;
     }
 
@@ -474,19 +537,19 @@ class WordInputWrappers {
         parent.remove();
         const i = this.container.indexOf(wordInputWrapper);
         i > -1 && this.container.splice(i, 1);
+        // update the number of words
+        this.wordNum.innerText = `${this.length}/${this.container.length}`;
     }
 
     fillSuggest(suggestionWrapper, word, input) {
         suggestionWrapper.innerHTML = "";
-        suggest(word)
-            .then((res) => {
-                res.forEach((obj) => {
-                    suggestionWrapper.appendChild(
-                        this.suggestItem(capitalize(obj.word), input)
-                    );
-                });
-            })
-            .catch(console.log);
+        suggest(word, (res) => {
+            res.forEach((obj) => {
+                suggestionWrapper.appendChild(
+                    this.suggestItem(capitalize(obj.word), input)
+                );
+            });
+        });
     }
 
     suggestItem(word, input) {
@@ -505,7 +568,6 @@ class WordInputWrappers {
             const word = wordInputWrapper.querySelector("input").value;
             word !== "" && res.push(word);
         });
-        console.log(res);
         localSet(wordsKey, res);
         return res;
     }
@@ -546,17 +608,58 @@ class Form {
         return this.wordInputWrappers.words;
     }
 
+    get delay() {
+        return this.slider.value * 1000;
+    }
+
     init() {
         this.wordInputWrappers.clear();
         let words = localGet(wordsKey);
-        if (words) {
-            words.forEach((word) => {
-                const wordInputWrapper = this.wordInputWrappers.create(word);
-                // this.form.insertBefore(wordInputWrapper, this.addButton)
-            });
-        }
+        globalWord = words[0] || "";
+        words.forEach((word) => {
+            console.log(word);
+            const wordInputWrapper = this.wordInputWrappers.create(word);
+            // this.form.insertBefore(wordInputWrapper, this.addButton)
+        });
+        hide(englishDict);
+        hide(koreanDict);
     }
 }
+
+const timer = (n, delayPerN, processing, done = () => {}) => {
+    const status = document.querySelector("#status");
+    let i = n;
+    let id;
+    id = setInterval(() => {
+        if (i == -1) {
+            done(status);
+            clearInterval(id);
+        } else {
+            processing(status, i);
+        }
+        i--;
+    }, delayPerN);
+    return id;
+};
+
+const initialWait = (delay, callback) => {
+    const dotdot = () => {
+        timer(2, 1000 / 3 - 50, (status) => (status.innerText += "."));
+    };
+
+    return timer(
+        delay,
+        1000,
+        (status, i) => {
+            status.innerText = `Starting in ${i}`;
+            dotdot();
+        },
+        (status) => {
+            callback();
+            status.innerText = "";
+        }
+    );
+};
 
 window.onload = () => {
     // set("userId", 200).then(console.log).catch(console.warn);
@@ -564,48 +667,86 @@ window.onload = () => {
     let option = document.getElementById("option");
     const form = new Form();
     const wheel = new Wheel(form);
+    let start = document.getElementById("start");
+    let status = document.getElementById("status");
+
+    let started;
+    let spinId;
+    let waitId;
+
+    const init = () => {
+        started = false;
+        wheel.render(option);
+        status.innerText = "";
+        // start.style.color = "black";
+        // start.querySelector('::after').style.color = "blue";
+        // toggle(start, "glow")
+    };
+
+    init();
+
     option.onclick = () => {
-        form.init();
         toggle(toolWindow);
-    };
-    wheel.render(option);
-    let spin = document.getElementById("spin");
-    let degree = 1500;
-    let id;
-    spin.onclick = () => {
-        let delay =
-            parseInt(
-                window
-                    .getComputedStyle(wheel.wheel)
-                    .transitionDuration.replace("s", "")
-            ) * 1000;
-        clearTimeout(id);
-        degree += Math.floor((Math.random() + 1) * 1500);
+        form.init();
 
-        wheel.wheel.style.transform = `rotate(${degree}deg)`;
-
-        let offset = wheel.anglePerSlice / 2;
-        let index = Math.floor(
-            Math.ceil((degree + offset) % 360) / wheel.anglePerSlice
-        );
-        const word = wheel.form.words[index];
-        let start = Date.now();
-        detect(word, (lang) => {
-            let end = Date.now() - start;
-            id = setTimeout(() => {
-                let synth = window.speechSynthesis;
-                // let voices = synth.getVoices();
-                // for (var i = 0; i < voices.length; i++) {
-                //     var option = voices[i].name + " (" + voices[i].lang + ")";
-                //     console.log(option);
-                // }
-                let msg = new SpeechSynthesisUtterance(word);
-                msg.lang = lang;
-                speechSynthesis.speak(msg);
-                // msg.voice = voices[]
-            }, delay - end);
-        });
+        if (started) {
+            spinId && clearTimeout(spinId);
+            waitId && clearTimeout(waitId);
+            setTimeout(() => init(), 1000);
+        }
     };
+
+    const spin = () => {
+        if (wheel.form.words.length != wheel.seen.size) {
+            let [word, extraTime, i] = wheel.spin();
+            let start = Date.now();
+            detect(word, (lang) => {
+                let end = Date.now() - start;
+                spinId = setTimeout(() => {
+                    let synth = window.speechSynthesis;
+                    // let voices = synth.getVoices();
+                    // for (var i = 0; i < voices.length; i++) {
+                    //     var option = voices[i].name + " (" + voices[i].lang + ")";
+                    //     console.log(option);
+                    // }
+                    let msg = new SpeechSynthesisUtterance(word);
+                    msg.lang = lang;
+                    speechSynthesis.speak(msg);
+                    // setTimeout(() => spin(), form.delay);
+                    timer(
+                        form.delay / 1000,
+                        1000,
+                        (status, i) => (status.innerText = i),
+                        () => {
+                            console.log(wheel.secs[i]);
+                            removeClass(
+                                wheel.secs[i].querySelector("p"),
+                                "blur"
+                            );
+                            spin();
+                        }
+                    );
+
+                    // msg.voice = voices[]
+                }, wheel.delay - end + extraTime);
+            });
+        } else {
+            started = false;
+            setTimeout(() => init(), 1000);
+            removeClass(start.querySelector(".inner"), "startClick");
+        }
+    };
+
+    start.addEventListener("click", () => {
+        if (!started) {
+            started = true;
+            waitId = initialWait(form.delay / 1000, () => spin());
+            addClass(start.querySelector(".inner"), "startClick");
+            wheel.secs.forEach((sec) =>
+                addClass(sec.querySelector("p"), "blur")
+            );
+        }
+    });
 
     // let addText = document.getElementById('addText')
     // addText.onkeyup = e =>{
@@ -627,8 +768,13 @@ window.onload = () => {
     };
     const doneButton = document.getElementById("done");
     doneButton.onclick = () => {
-        wheel.render(option);
-        hide(toolWindow);
+        console.log(form.wordInputWrappers.length);
+        if (form.wordInputWrappers.length < 3) {
+            console.log("too little");
+        } else {
+            init();
+            hide(toolWindow);
+        }
     };
 
     englishMore.addEventListener("click", () => {
