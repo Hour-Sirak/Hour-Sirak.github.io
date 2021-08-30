@@ -700,12 +700,18 @@ window.addEventListener("load", () => {
     test.addEventListener("click", (e) => {
         e.stopPropagation();
         e.preventDefault();
-        test.innerText += 1;
+        test.appendChild(document.createTextNode("1"));
     });
+
     test.addEventListener("touchstart", (e) => {
         e.stopPropagation();
         e.preventDefault();
-        test.innerText += 2;
+        test.appendChild(document.createTextNode("2"));
+    });
+    test.addEventListener("touchend", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        test.appendChild(document.createTextNode("3"));
     });
 
     option.addEventListener("touchstart", () => {
