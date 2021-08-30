@@ -11,85 +11,87 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <main>
-            <button type="button" class="test">0</button>
-            <div class="container">
-                <button type="button" id="option" class="button">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </button>
-                <div id="wheel"></div>
+        <div onclick="void(0)">
+            <main>
+                <button type="button" class="test">0</button>
+                <div class="container">
+                    <button type="button" id="option" class="button">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </button>
+                    <div id="wheel"></div>
 
-                <div id="start">
-                    <button class="inner button"></button>
+                    <div id="start">
+                        <button class="inner button"></button>
+                    </div>
+
+                    <div id="status"></div>
                 </div>
 
-                <div id="status"></div>
-            </div>
+                <div id="toolWindow" class="hide">
+                    <form action="" autocomplete="off" class="sunken scroll">
+                        <div id="delayWrapper">
+                            <label for="delay">Delay:</label>
 
-            <div id="toolWindow" class="hide">
-                <form action="" autocomplete="off" class="sunken scroll">
-                    <div id="delayWrapper">
-                        <label for="delay">Delay:</label>
+                            <div id="sliderWrapper">
+                                <input
+                                    type="range"
+                                    min="5"
+                                    max="20"
+                                    name="delay"
+                                    id="slider"
+                                />
+                                <div id="delayValue">
+                                    <p>3s</p>
+                                </div>
+                            </div>
+                        </div>
 
-                        <div id="sliderWrapper">
-                            <input
-                                type="range"
-                                min="5"
-                                max="20"
-                                name="delay"
-                                id="slider"
-                            />
-                            <div id="delayValue">
-                                <p>3s</p>
+                        <div id="wordInputContainer"></div>
+                    </form>
+
+                    <div id="dictContainer">
+                        <div id="dictionary1" class="sunken scroll">
+                            <h2><i class="fas fa-caret-down"></i>English</h2>
+                            <div class="hide"></div>
+                            <div id="englishLds" class="lds-ellipsis hide">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div id="dictionary2" class="sunken scroll">
+                            <h2><i class="fas fa-caret-down"></i>Korean</h2>
+                            <div class="hide"></div>
+                            <div id="koreanLds" class="lds-ellipsis hide">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
                             </div>
                         </div>
                     </div>
 
-                    <div id="wordInputContainer"></div>
-                </form>
-
-                <div id="dictContainer">
-                    <div id="dictionary1" class="sunken scroll">
-                        <h2><i class="fas fa-caret-down"></i>English</h2>
-                        <div class="hide"></div>
-                        <div id="englishLds" class="lds-ellipsis hide">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+                    <div id="fourth">
+                        <button id="addButton" class="button">
+                            <i class="fas fa-plus"></i>
+                            <!-- <i class="fas fa-plus-circle"></i> -->
+                        </button>
+                        <div id="wordNum">0</div>
                     </div>
-                    <div id="dictionary2" class="sunken scroll">
-                        <h2><i class="fas fa-caret-down"></i>Korean</h2>
-                        <div class="hide"></div>
-                        <div id="koreanLds" class="lds-ellipsis hide">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+                    <div id="confirmCancel">
+                        <button class="button" id="done">
+                            <span> Done </span>
+                        </button>
+                        <button class="button" id="cancel">
+                            <span>Cancel</span>
+                        </button>
                     </div>
                 </div>
-
-                <div id="fourth">
-                    <button id="addButton" class="button">
-                        <i class="fas fa-plus"></i>
-                        <!-- <i class="fas fa-plus-circle"></i> -->
-                    </button>
-                    <div id="wordNum">0</div>
-                </div>
-                <div id="confirmCancel">
-                    <button class="button" id="done">
-                        <span> Done </span>
-                    </button>
-                    <button class="button" id="cancel">
-                        <span>Cancel</span>
-                    </button>
-                </div>
-            </div>
-        </main>
+            </main>
+        </div>
 
         <!-- <script src="https://cdn.jsdelivr.net/npm/idb-keyval@5/dist/iife/index-min.js"></script> -->
 
