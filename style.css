@@ -6,8 +6,9 @@
     /* font-size: 1rem; */
 }
 
-body{
+html, body{
     overflow: hidden;
+    position: relative;
 }
 
 :root {
