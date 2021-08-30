@@ -702,7 +702,7 @@ window.onload = () => {
         handleOptionClick();
     });
     option.addEventListener("click", () => {
-        document.querySelector(".test").innerText = "click";
+        document.querySelector(".test").innerText = "clicked";
         handleOptionClick();
     });
 
