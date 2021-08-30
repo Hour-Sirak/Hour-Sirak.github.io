@@ -713,6 +713,16 @@ window.addEventListener("load", () => {
         e.preventDefault();
         test.appendChild(document.createTextNode("3"));
     });
+    test.addEventListener("mouseup", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        test.appendChild(document.createTextNode("4"));
+    });
+    test.addEventListener("mousedown", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        test.appendChild(document.createTextNode("5"));
+    });
 
     option.addEventListener("touchstart", () => {
         // document.querySelector(".test").innerText = "touch";
