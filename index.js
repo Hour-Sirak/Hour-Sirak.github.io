@@ -662,7 +662,7 @@ const initialWait = (delay, callback) => {
     );
 };
 
-window.addEventListener("load", () => {
+const main = () => {
     // set("userId", 200).then(console.log).catch(console.warn);
     const container = document.querySelector(".container");
     let option = document.getElementById("option");
@@ -821,7 +821,9 @@ window.addEventListener("load", () => {
     koreanMore.addEventListener("click", () => {
         renderDict(language.korean);
     });
-});
+};
+
+window.addEventListener("load", main);
 
 const toggleDictWidth = () => {
     if (
