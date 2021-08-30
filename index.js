@@ -690,6 +690,8 @@ window.onload = () => {
         toggle(toolWindow);
         form.init();
 
+        option.style.backgroundColor = "#ddd";
+
         if (started) {
             spinId && clearTimeout(spinId);
             waitId && clearTimeout(waitId);
