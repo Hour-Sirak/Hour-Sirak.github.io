@@ -697,10 +697,14 @@ window.onload = () => {
         }
     };
     const test = document.querySelector(".test");
-    test.addEventListener("click", () => {
+    test.addEventListener("click", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
         test.innerText += 1;
     });
-    test.addEventListener("touchstart", () => {
+    test.addEventListener("touchstart", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
         test.innerText += 2;
     });
 
