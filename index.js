@@ -686,17 +686,22 @@ window.onload = () => {
 
     init();
 
-    option.addEventListener("click", () => {
+    const handleOptionClick = () => {
         toggle(toolWindow);
         form.init();
-
-        option.style.backgroundColor = "#ddd";
 
         if (started) {
             spinId && clearTimeout(spinId);
             waitId && clearTimeout(waitId);
             setTimeout(() => init(), 1000);
         }
+    };
+
+    option.addEventListener("touchstart", () => {
+        handleOptionClick();
+    });
+    option.addEventListener("click", () => {
+        handleOptionClick();
     });
 
     const spin = () => {
