@@ -698,9 +698,11 @@ window.onload = () => {
     };
 
     option.addEventListener("touchstart", () => {
+        document.querySelector(".test").innerText = "touch";
         handleOptionClick();
     });
     option.addEventListener("click", () => {
+        document.querySelector(".test").innerText = "click";
         handleOptionClick();
     });
 

@@ -292,6 +292,13 @@ h2 {
     /* transition: background-color color 0.8s ease-in-out; */
 }
 
+.test{
+    background-color: aqua;
+    position: sticky;
+    margin: 10px;
+
+}
+
 #status {
     position: absolute;
     bottom: -2rem;
