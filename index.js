@@ -687,7 +687,7 @@ window.onload = () => {
     init();
 
     const handleOptionClick = () => {
-        toggle(toolWindow);
+        show(toolWindow);
         form.init();
 
         if (started) {
