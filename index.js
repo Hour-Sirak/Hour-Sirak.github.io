@@ -477,8 +477,9 @@ class WordInputWrappers {
         const wordInputWrapper = document.createElement("div");
         wordInputWrapper.classList.add("wordInputWrapper");
         wordInputWrapper.innerHTML = `<input type='text' name='word' id='word${this.id}' value='${word}'> <button type='button' class='delete button'><i class="fas fa-times"></i></button>`;
-        wordInputWrapper.lastElementChild.onclick = () =>
-            this.delete(div, wordInputWrapper);
+        wordInputWrapper.lastElementChild.addEventListener("click", () =>
+            this.delete(div, wordInputWrapper)
+        );
         const input = wordInputWrapper.firstElementChild;
         const suggestionWrapper = document.createElement("ul");
         suggestionWrapper.classList.add("suggestionWrapper");
@@ -555,9 +556,9 @@ class WordInputWrappers {
     suggestItem(word, input) {
         const li = document.createElement("li");
         li.innerText = word;
-        li.onclick = () => {
+        li.addEventListener("click", () => {
             input.value = li.innerText;
-        };
+        });
         return li;
     }
 
@@ -589,9 +590,9 @@ class Form {
 
         this.init();
 
-        this.addButton.onclick = () => {
+        this.addButton.addEventListener("click", () => {
             this.wordInputWrappers.create();
-        };
+        });
         const wordInputContainer = this.wordInputWrappers.wordInputContainer;
         const resizeObserver = new ResizeObserver((entries) => {
             this.form.scrollTo({
@@ -685,7 +686,7 @@ window.onload = () => {
 
     init();
 
-    option.onclick = () => {
+    option.addEventListener("click", () => {
         toggle(toolWindow);
         form.init();
 
@@ -694,7 +695,7 @@ window.onload = () => {
             waitId && clearTimeout(waitId);
             setTimeout(() => init(), 1000);
         }
-    };
+    });
 
     const spin = () => {
         if (wheel.form.words.length != wheel.seen.size) {
@@ -763,11 +764,11 @@ window.onload = () => {
     let toolWindow = document.getElementById("toolWindow");
 
     const cancelButton = document.getElementById("cancel");
-    cancelButton.onclick = () => {
+    cancelButton.addEventListener("click", () => {
         toggle(toolWindow);
-    };
+    });
     const doneButton = document.getElementById("done");
-    doneButton.onclick = () => {
+    doneButton.addEventListener("click", () => {
         console.log(form.wordInputWrappers.length);
         if (form.wordInputWrappers.length < 3) {
             console.log("too little");
@@ -775,7 +776,7 @@ window.onload = () => {
             init();
             hide(toolWindow);
         }
-    };
+    });
 
     englishMore.addEventListener("click", () => {
         renderDict(language.english);
