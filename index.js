@@ -696,13 +696,20 @@ window.onload = () => {
             setTimeout(() => init(), 1000);
         }
     };
+    const test = document.querySelector(".test");
+    test.addEventListener("click", () => {
+        test.innerText += 1;
+    });
+    test.addEventListener("touchstart", () => {
+        test.innerText += 2;
+    });
 
     option.addEventListener("touchstart", () => {
-        document.querySelector(".test").innerText = "touch";
+        // document.querySelector(".test").innerText = "touch";
         handleOptionClick();
     });
     option.addEventListener("click", () => {
-        document.querySelector(".test").innerText = "clicked";
+        // document.querySelector(".test").innerText = "clicked";
         handleOptionClick();
     });
 
