@@ -33,7 +33,6 @@ button {
 }
 
 .button {
-    cursor: pointer;
     width: 4rem;
     height: 2rem;
     display: flex;
@@ -284,8 +283,9 @@ h2 {
 
 #option div {
     /* position: absolute; */
-    width: 17%;
-    height: 17%;
+    /* width: 17%; */
+    width: 6px;
+    height: 6px;
     border: 1.37px rgb(255, 255, 255, 0.7) solid;
     /* background-color: black; */
     border-radius: 50%;
