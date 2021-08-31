@@ -698,31 +698,19 @@ const main = () => {
     };
     const test = document.querySelector(".test");
     test.addEventListener("click", (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        test.appendChild(document.createTextNode("1"));
+        test.appendChild(document.createTextNode("clicked"));
     });
 
-    test.addEventListener("touchstart", (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        test.appendChild(document.createTextNode("2"));
-    });
-    test.addEventListener("touchend", (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        test.appendChild(document.createTextNode("3"));
-    });
-    test.addEventListener("mouseup", (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        test.appendChild(document.createTextNode("4"));
-    });
-    test.addEventListener("mousedown", (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        test.appendChild(document.createTextNode("5"));
-    });
+    // test.addEventListener("touchstart", (e) => {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     test.appendChild(document.createTextNode("2"));
+    // });
+    // test.addEventListener("touchend", (e) => {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     test.appendChild(document.createTextNode("3"));
+    // });
 
     option.addEventListener("touchstart", () => {
         // document.querySelector(".test").innerText = "touch";
