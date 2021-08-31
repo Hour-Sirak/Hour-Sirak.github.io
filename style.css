@@ -6,8 +6,7 @@
     /* font-size: 1rem; */
 }
 
-html,
-body {
+html, body{
     overflow: hidden;
     position: relative;
 }
@@ -313,11 +312,10 @@ h2 {
 
 #toolWindow {
     position: absolute;
-    transform: translate(600px);
-    /* width: 90vw;
-    height: 85vh; */
+    width: 90vw;
+    height: 85vh;
     padding: 1rem;
-    z-index: -9;
+    z-index: 9999;
     border-radius: 1rem;
     /* background-color: rgba(64, 224, 208, 0.8); */
     /* background: linear-gradient(
