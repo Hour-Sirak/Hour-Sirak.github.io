@@ -615,7 +615,7 @@ class Form {
 
     init() {
         this.wordInputWrappers.clear();
-        let words = localGet(wordsKey);
+        let words = localGet(wordsKey) || [];
         globalWord = words[0] || "";
         words.forEach((word) => {
             console.log(word);
