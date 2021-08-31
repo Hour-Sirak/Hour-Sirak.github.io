@@ -664,6 +664,9 @@ const initialWait = (delay, callback) => {
 
 const main = () => {
     // set("userId", 200).then(console.log).catch(console.warn);
+    const test = document.querySelector(".test");
+    test.appendChild(document.createTextNode("wtf"));
+
     const container = document.querySelector(".container");
     let option = document.getElementById("option");
     const form = new Form();
@@ -674,6 +677,7 @@ const main = () => {
     let started;
     let spinId;
     let waitId;
+    test.appendChild(document.createTextNode("1"));
 
     const init = () => {
         started = false;
@@ -685,6 +689,7 @@ const main = () => {
     };
 
     init();
+    test.appendChild(document.createTextNode("2"));
 
     const handleOptionClick = () => {
         show(toolWindow);
@@ -696,7 +701,6 @@ const main = () => {
             setTimeout(() => init(), 1000);
         }
     };
-    const test = document.querySelector(".test");
     test.addEventListener("click", (e) => {
         test.appendChild(document.createTextNode("clicked"));
     });
@@ -832,4 +836,3 @@ const toggleDictWidth = () => {
         dictionary2.classList.remove("toMiddle");
     }
 };
-
