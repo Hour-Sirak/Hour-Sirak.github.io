@@ -708,8 +708,8 @@ const main = () => {
 
     const spin = () => {
         if (wheel.form.words.length != wheel.seen.size) {
-            let [word, extraTime, i] = wheel.spin();
             let start = Date.now();
+            let [word, extraTime, i] = wheel.spin();
             detect(word, (lang) => {
                 let end = Date.now() - start;
                 speak(word, lang)
@@ -740,7 +740,7 @@ const main = () => {
     };
 
     start.addEventListener("click", () => {
-        speak('', 'en')
+        speak('hello', 'en')
         if (!started && wheel.form.words.length > 2) {
             started = true;
             waitId = initialWait(form.delay / 1000, () => spin());
