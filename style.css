@@ -120,7 +120,7 @@ h2 {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px, rgba(0, 0, 0, 0.05) 0px 3px 0px;
     border: 2px rgba(255, 255, 255, 0.5) solid;
     transition: transform cubic-bezier(0, 0.99, 0.44, 0.99);
-    transition-duration: 3s;
+    transition-duration: 5s;
 }
 
 #wheel .sec {

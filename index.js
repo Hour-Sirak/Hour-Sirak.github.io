@@ -712,7 +712,13 @@ const main = () => {
             let [word, extraTime, i] = wheel.spin();
             detect(word, (lang) => {
                 let end = Date.now() - start;
-                speak(word, lang)
+
+                // speak
+                setTimeout(() => {
+                    speak(word, lang);
+                }, wheel.delay);
+
+                // for calling the next spin
                 spinId = setTimeout(() => {
                     // setTimeout(() => spin(), form.delay);
                     timer(
@@ -728,8 +734,6 @@ const main = () => {
                             spin();
                         }
                     );
-
-                    // msg.voice = voices[]
                 }, wheel.delay - end + extraTime);
             });
         } else {
@@ -740,8 +744,8 @@ const main = () => {
     };
 
     start.addEventListener("click", () => {
-        speak('hello', 'en')
         if (!started && wheel.form.words.length > 2) {
+            speak("Please getting ready", "en");
             started = true;
             waitId = initialWait(form.delay / 1000, () => spin());
             addClass(start.querySelector(".inner"), "startClick");
