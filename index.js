@@ -664,7 +664,8 @@ const initialWait = (delay, callback) => {
 
 const main = () => {
     // set("userId", 200).then(console.log).catch(console.warn);
-
+    const btn = document.querySelector('.btn')
+    btn.addEventListener('click', () => speak('hello', 'en'))
     const container = document.querySelector(".container");
     let option = document.getElementById("option");
     const form = new Form();
@@ -711,16 +712,8 @@ const main = () => {
             let start = Date.now();
             detect(word, (lang) => {
                 let end = Date.now() - start;
+                speak(word, lang)
                 spinId = setTimeout(() => {
-                    let synth = window.speechSynthesis;
-                    // let voices = synth.getVoices();
-                    // for (var i = 0; i < voices.length; i++) {
-                    //     var option = voices[i].name + " (" + voices[i].lang + ")";
-                    //     console.log(option);
-                    // }
-                    let msg = new SpeechSynthesisUtterance(word);
-                    msg.lang = lang;
-                    speechSynthesis.speak(msg);
                     // setTimeout(() => spin(), form.delay);
                     timer(
                         form.delay / 1000,
@@ -816,4 +809,16 @@ const toggleDictWidth = () => {
         dictionary2.classList.remove("absolute");
         dictionary2.classList.remove("toMiddle");
     }
+};
+
+const speak = (word, lang) => {
+    let synth = window.speechSynthesis;
+    // let voices = synth.getVoices();
+    // for (var i = 0; i < voices.length; i++) {
+    //     var option = voices[i].name + " (" + voices[i].lang + ")";
+    //     console.log(option);
+    // }
+    let msg = new SpeechSynthesisUtterance(word);
+    msg.lang = lang;
+    speechSynthesis.speak(msg);
 };
