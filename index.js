@@ -740,7 +740,8 @@ const main = () => {
     };
 
     start.addEventListener("click", () => {
-        if (!started) {
+        speak('', 'en')
+        if (!started && wheel.form.words.length > 2) {
             started = true;
             waitId = initialWait(form.delay / 1000, () => spin());
             addClass(start.querySelector(".inner"), "startClick");
@@ -750,18 +751,6 @@ const main = () => {
         }
     });
 
-    // let addText = document.getElementById('addText')
-    // addText.onkeyup = e =>{
-    // 	let word = addText.value
-    // 	if(e.key === 'Enter'){
-    // 		let msg = new SpeechSynthesisUtterance(word)
-    // 		speechSynthesis.speak(msg)
-    // 		addText.value = ''
-    // 		words.push(word)
-    // 		renderWheel()
-
-    // 	}
-    // }
     let toolWindow = document.getElementById("toolWindow");
 
     const cancelButton = document.getElementById("cancel");
