@@ -492,7 +492,7 @@ class WordInputWrappers {
         input.onfocus = () => {
             const word = input.value;
             wordInputWrapper.style.margin = "2px";
-            border.style.clipPath = "inset(0 0 0 0)";
+            addClass(border, "slidingBorder");
             globalWord = word;
 
             renderDict();
@@ -507,7 +507,7 @@ class WordInputWrappers {
             input.value = word.trim();
             wordInputWrapper.style.transform = "scale(1)";
             wordInputWrapper.style.margin = "0px";
-            border.style.clipPath = "inset(0 100% 0 0)";
+            removeClass(border, "slidingBorder");
             setTimeout(() => hide(suggestionWrapper), 300);
             if (globalWord != word) {
                 globalWord = word;
@@ -778,7 +778,7 @@ const main = () => {
     const doneButton = document.getElementById("done");
     doneButton.addEventListener("click", () => {
         console.log(form.wordInputWrappers.length);
-        const len = form.wordInputWrappers.length
+        const len = form.wordInputWrappers.length;
         if (len < 3 && len !== 0) {
             console.log("too little");
         } else {
