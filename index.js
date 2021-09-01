@@ -778,7 +778,8 @@ const main = () => {
     const doneButton = document.getElementById("done");
     doneButton.addEventListener("click", () => {
         console.log(form.wordInputWrappers.length);
-        if (form.wordInputWrappers.length < 3) {
+        const len = form.wordInputWrappers.length
+        if (len < 3 && len !== 0) {
             console.log("too little");
         } else {
             init();
