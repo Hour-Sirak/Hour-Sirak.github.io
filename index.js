@@ -594,16 +594,16 @@ class Form {
             this.wordInputWrappers.create();
         });
         const wordInputContainer = this.wordInputWrappers.wordInputContainer;
-        const resizeObserver = new ResizeObserver((entries) => {
-            this.form.scrollTo({
-                top: this.form.scrollHeight,
-                behavior: "smooth",
-            });
-            // this.form.scrollIntoView(true)
-            console.log(this.form.scrollHeight);
-        });
+        // const resizeObserver = new ResizeObserver((entries) => {
+        //     this.form.scrollTo({
+        //         top: this.form.scrollHeight,
+        //         behavior: "smooth",
+        //     });
+        //     // this.form.scrollIntoView(true)
+        //     console.log(this.form.scrollHeight);
+        // });
 
-        // resizeObserver.observe(wordInputContainer);
+        // // resizeObserver.observe(wordInputContainer);
     }
     get words() {
         return this.wordInputWrappers.words;
