@@ -36,6 +36,7 @@ body {
 
 button {
     border: none;
+    cursor: pointer;
 }
 
 .button {
@@ -295,15 +296,6 @@ h2 {
     /* background-color: black; */
     border-radius: 50%;
     /* transition: background-color color 0.8s ease-in-out; */
-}
-
-.test {
-    background-color: rgb(20, 228, 83);
-    position: sticky;
-
-    margin: 10px;
-    padding: 10px;
-    cursor: pointer;
 }
 
 #status {

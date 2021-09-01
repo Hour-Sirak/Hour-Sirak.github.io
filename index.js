@@ -664,8 +664,6 @@ const initialWait = (delay, callback) => {
 
 const main = () => {
     // set("userId", 200).then(console.log).catch(console.warn);
-    const test = document.querySelector(".test");
-    test.appendChild(document.createTextNode("wtf"));
 
     const container = document.querySelector(".container");
     let option = document.getElementById("option");
@@ -677,7 +675,6 @@ const main = () => {
     let started;
     let spinId;
     let waitId;
-    test.appendChild(document.createTextNode("1"));
 
     const init = () => {
         started = false;
@@ -689,7 +686,6 @@ const main = () => {
     };
 
     init();
-    test.appendChild(document.createTextNode("2"));
 
     const handleOptionClick = () => {
         show(toolWindow);
@@ -701,27 +697,11 @@ const main = () => {
             setTimeout(() => init(), 1000);
         }
     };
-    test.addEventListener("click", (e) => {
-        test.appendChild(document.createTextNode("clicked"));
-    });
-
-    // test.addEventListener("touchstart", (e) => {
-    //     e.stopPropagation();
-    //     e.preventDefault();
-    //     test.appendChild(document.createTextNode("2"));
-    // });
-    // test.addEventListener("touchend", (e) => {
-    //     e.stopPropagation();
-    //     e.preventDefault();
-    //     test.appendChild(document.createTextNode("3"));
-    // });
 
     option.addEventListener("touchstart", () => {
-        // document.querySelector(".test").innerText = "touch";
         handleOptionClick();
     });
     option.addEventListener("click", () => {
-        // document.querySelector(".test").innerText = "clicked";
         handleOptionClick();
     });
 
