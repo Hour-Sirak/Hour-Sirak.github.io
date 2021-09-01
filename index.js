@@ -664,8 +664,8 @@ const initialWait = (delay, callback) => {
 
 const main = () => {
     // set("userId", 200).then(console.log).catch(console.warn);
-    const btn = document.querySelector('.btn')
-    btn.addEventListener('click', () => speak('hello', 'en'))
+    // const btn = document.querySelector('.btn')
+    // btn.addEventListener('click', () => speak('hello', 'en'))
     const container = document.querySelector(".container");
     let option = document.getElementById("option");
     const form = new Form();
