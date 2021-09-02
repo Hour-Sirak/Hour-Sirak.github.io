@@ -233,6 +233,7 @@ const structured = (word, lang = language.english) => {
     const formatPhon = (phon) => (phon && `/${phon}/`) || "";
     meaning(word, lang)
         .then((res) => {
+            console.log(res)
             let html = `
         <ul className="wordWrapper">
             ${res
