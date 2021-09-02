@@ -1,5 +1,6 @@
 let WORDS = []; //, "a", "b", "c", "d"]//['안녕하세요!', '소년', '어머니', '바보']
 const wordsKey = "83473644785";
+const delayKey = "65445672345";
 const dictContainer = document.getElementById("dictContainer");
 
 const dictionary1 = document.getElementById("dictionary1");
@@ -433,10 +434,13 @@ class Slider {
         this.delayValue = document.getElementById("delayValue");
         this.min = slider.min;
         this.max = slider.max;
+        const p = this.delayValue.firstElementChild;
+        const initialDelay = localGet(delayKey) || this.value;
+        p.innerText = initialDelay + "s";
+        this.slider.value = initialDelay;
+
         let x = this.left;
         this.delayValue.style.left = `calc(${x}% + (${8 - x * 0.15}px))`;
-        const p = this.delayValue.firstElementChild;
-        p.innerText = this.value + "s";
         this.slider.oninput = () => {
             x = this.left;
             p.innerText = this.value + "s";
@@ -453,6 +457,10 @@ class Slider {
             parseFloat(window.getComputedStyle(this.delayValue).width) / 2 +
             1
         );
+    }
+
+    save() {
+        localSet(delayKey, this.value);
     }
 }
 
@@ -763,13 +771,13 @@ const main = () => {
     });
     const doneButton = document.getElementById("done");
     doneButton.addEventListener("click", () => {
-        console.log(form.wordInputWrappers.length);
         const len = form.wordInputWrappers.length;
         if (len < 3 && len !== 0) {
-            console.log("too little");
+            alert("too little");
         } else {
             init();
             hide(toolWindow);
+            form.slider.save();
         }
     });
 
@@ -811,7 +819,11 @@ const speak = (word, lang) => {
     //     var option = voices[i].name + " (" + voices[i].lang + ")";
     //     console.log(option);
     // }
-    let msg = new SpeechSynthesisUtterance(word);
-    msg.lang = lang;
-    speechSynthesis.speak(msg);
+    try {
+        let msg = new SpeechSynthesisUtterance(word);
+        msg.lang = lang;
+        speechSynthesis.speak(msg);
+    } catch (error) {
+        console.log(error)
+    }
 };
