@@ -703,13 +703,11 @@ const main = () => {
         if (started) {
             spinId && clearTimeout(spinId);
             waitId && clearTimeout(waitId);
+            console.log(spinId, waitId)
             setTimeout(() => init(), 1000);
         }
     };
 
-    option.addEventListener("touchstart", () => {
-        handleOptionClick();
-    });
     option.addEventListener("click", () => {
         handleOptionClick();
     });
@@ -814,16 +812,19 @@ const toggleDictWidth = () => {
 
 const speak = (word, lang) => {
     let synth = window.speechSynthesis;
-    // let voices = synth.getVoices();
-    // for (var i = 0; i < voices.length; i++) {
-    //     var option = voices[i].name + " (" + voices[i].lang + ")";
-    //     console.log(option);
-    // }
+ 
+    let voices = synth.getVoices();
+
+    for (var i = 0; i < voices.length; i++) {
+        console.log(voices[i])
+        // if (voices[i].default) {
+        // }
+    }
     try {
         let msg = new SpeechSynthesisUtterance(word);
         msg.lang = lang;
         speechSynthesis.speak(msg);
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 };
