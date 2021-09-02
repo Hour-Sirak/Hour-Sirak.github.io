@@ -561,7 +561,11 @@ ol {
 }
 
 .partOfSpeech {
-    padding-left: 1rem;
+    margin: 0.5rem 0 1rem 1rem;
+    background-color: #ccc;
+    display: inline-block;
+    padding: 0.1rem 0.2rem;
+    border-radius: 5px;
 }
 
 #fourth {

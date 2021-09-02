@@ -680,8 +680,8 @@ const initialWait = (delay, callback) => {
 
 const main = () => {
     // set("userId", 200).then(console.log).catch(console.warn);
-    const btn = document.querySelector(".btn");
-    btn.addEventListener("click", () => speak("고양이", language.format("ko")));
+    // const btn = document.querySelector(".btn");
+    // btn.addEventListener("click", () => speak("고양이", language.format("ko")));
     const container = document.querySelector(".container");
     let option = document.getElementById("option");
     const form = new Form();
@@ -730,7 +730,7 @@ const main = () => {
                 // speak
                 setTimeout(() => {
                     speak(word, language.format(lang) || lang);
-                    console.log("lang:", language.format(lang) || lang);
+
                 }, wheel.delay);
 
                 // for calling the next spin
@@ -818,30 +818,6 @@ const toggleDictWidth = () => {
         dictionary2.classList.remove("toMiddle");
     }
 };
-
-// const speak = (word, lang) => {
-//     let synth = window.speechSynthesis;
-
-//     let voices = synth.getVoices();
-
-//     for (var i = 0; i < voices.length; i++) {
-//         console.log(voices[i]);
-//         // if (voices[i].default) {
-//         // }
-//     }
-//     try {
-//         let msg = new SpeechSynthesisUtterance(word);
-//         msg.lang = lang;
-//         speechSynthesis.speak(msg);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
-
-/**
- * retries until there have been voices loaded. No stopper flag included in this example.
- * Note that this function assumes, that there are voices installed on the host system.
- */
 
 function loadVoicesWhenAvailable(onComplete = () => {}) {
     _speechSynth = window.speechSynthesis;
