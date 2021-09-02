@@ -20,16 +20,16 @@ let source;
 const language = {
     english: "en",
     korean: "ko",
-    formats: {'en': 'en-US', 'ko': 'ko-KR'},
+    formats: { en: "en-US", ko: "ko-KR" },
     getTarget(source) {
         return this.english === source ? this.korean : this.english;
     },
     getHtmlDiv(lang) {
         return this.english === lang ? englishDict : koreanDict;
     },
-    format(lang){
-        return this.formats[lang]
-    }
+    format(lang) {
+        return this.formats[lang];
+    },
 };
 
 const localGet = (key) => JSON.parse(localStorage.getItem(key));
@@ -676,8 +676,8 @@ const initialWait = (delay, callback) => {
 
 const main = () => {
     // set("userId", 200).then(console.log).catch(console.warn);
-    // const btn = document.querySelector('.btn')
-    // btn.addEventListener('click', () => speak('hello', 'en'))
+    const btn = document.querySelector(".btn");
+    btn.addEventListener("click", () => speak("고양이", language.format("ko")));
     const container = document.querySelector(".container");
     let option = document.getElementById("option");
     const form = new Form();
@@ -707,7 +707,7 @@ const main = () => {
         if (started) {
             spinId && clearTimeout(spinId);
             waitId && clearTimeout(waitId);
-            console.log(spinId, waitId)
+            console.log(spinId, waitId);
             setTimeout(() => init(), 1000);
         }
     };
@@ -726,7 +726,7 @@ const main = () => {
                 // speak
                 setTimeout(() => {
                     speak(word, language.format(lang) || lang);
-                    console.log('lang:', language.format(lang) || lang)
+                    console.log("lang:", language.format(lang) || lang);
                 }, wheel.delay);
 
                 // for calling the next spin
@@ -817,11 +817,11 @@ const toggleDictWidth = () => {
 
 const speak = (word, lang) => {
     let synth = window.speechSynthesis;
- 
+
     let voices = synth.getVoices();
 
     for (var i = 0; i < voices.length; i++) {
-        console.log(voices[i])
+        console.log(voices[i]);
         // if (voices[i].default) {
         // }
     }
