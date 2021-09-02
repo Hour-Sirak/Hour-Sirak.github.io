@@ -20,12 +20,16 @@ let source;
 const language = {
     english: "en",
     korean: "ko",
+    formats: {'en': 'en-US', 'ko': 'ko-KR'},
     getTarget(source) {
         return this.english === source ? this.korean : this.english;
     },
     getHtmlDiv(lang) {
         return this.english === lang ? englishDict : koreanDict;
     },
+    format(lang){
+        return this.formats[lang]
+    }
 };
 
 const localGet = (key) => JSON.parse(localStorage.getItem(key));
@@ -721,7 +725,8 @@ const main = () => {
 
                 // speak
                 setTimeout(() => {
-                    speak(word, lang);
+                    speak(word, language.format(lang) || lang);
+                    console.log('lang:', language.format(lang) || lang)
                 }, wheel.delay);
 
                 // for calling the next spin
